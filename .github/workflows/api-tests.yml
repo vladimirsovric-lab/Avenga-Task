@@ -28,6 +28,7 @@ jobs:
         if: always()
         run: |
           docker run --rm \
+          rm -rf target/site/allure-maven-plugin
           -v ${{ github.workspace }}/target:/app/target \
           bookstore-api-tests \
           allure:report
