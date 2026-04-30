@@ -1,6 +1,8 @@
 package tests;
 
 import config.TestConfig;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.Test;
 import utils.TestData;
@@ -24,6 +26,8 @@ class BooksApiTest {
     }
 
     @Test
+    @Feature("Books API")
+    @Description("Verify getting all books returns non-empty list")
     void shouldGetAllBooks() {
         request()
             .when()

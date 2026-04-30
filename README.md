@@ -12,7 +12,7 @@ The goal was to design a clean, maintainable, and scalable API test suite with s
 
 * Java 17
 * Maven
-* JUnit 6
+* JUnit 5
 * RestAssured
 * Docker
 * GitHub Actions (CI/CD)

@@ -16,13 +16,24 @@ jobs:
       - name: Build Docker image
         run: docker build -t bookstore-api-tests .
 
-      - name: Run tests in Docker container
+      - name: Generate Allure report
         run: |
           docker run --rm \
           -e BASE_URL=https://fakerestapi.azurewebsites.net \
           -v ${{ github.workspace }}/target:/app/target \
           bookstore-api-tests \
-          test surefire-report:report
+          test
+          
+      - name: Generate Allure report files
+        run: |
+          mkdir -p allure-report
+          allure generate target/allure-results -o allure-report
+
+      - name: Upload Allure report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report/
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
