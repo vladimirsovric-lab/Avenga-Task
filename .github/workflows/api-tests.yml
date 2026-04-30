@@ -22,7 +22,7 @@ jobs:
           -e BASE_URL=https://fakerestapi.azurewebsites.net \
           -v ${{ github.workspace }}/target:/app/target \
           bookstore-api-tests \
-          clean test surefire-report:report
+          test surefire-report:report
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
