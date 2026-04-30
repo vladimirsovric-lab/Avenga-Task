@@ -27,8 +27,8 @@ jobs:
       - name: Generate Allure report
         if: always()
         run: |
-          docker run --rm \
           rm -rf target/site/allure-maven-plugin
+          docker run --rm \
           -v ${{ github.workspace }}/target:/app/target \
           bookstore-api-tests \
           allure:report
