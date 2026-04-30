@@ -10,8 +10,6 @@ import utils.TestData;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-import utils.TestData;
-
 class BooksApiTest {
 
     private static final String BASE_PATH = "/api/v1/Books";
@@ -28,7 +26,7 @@ class BooksApiTest {
     @Test
     @Feature("Books API")
     @Description("Verify getting all books returns non-empty list")
-    void shouldGetAllBooks() {
+    void testGetAllBooks() {
         request()
             .when()
                 .get(BASE_PATH)
@@ -40,7 +38,7 @@ class BooksApiTest {
     }
 
     @Test
-    void shouldGetBookByValidId() {
+    void testGetBookByValidId() {
         request()
             .when()
                 .get(BASE_PATH + "/" + VALID_ID)
@@ -51,7 +49,7 @@ class BooksApiTest {
     }
 
     @Test
-    void shouldReturnStatus404ForNonExistingBook() {
+    void testReturnStatus404ForNonExistingBook() {
         request()
             .when()
                 .get(BASE_PATH + "/" + NON_EXISTING_ID)
@@ -60,7 +58,7 @@ class BooksApiTest {
     }
 
     @Test
-    void shouldReturnStatus400ForInvalidFormat() {
+    void testReturnStatus400ForInvalidFormat() {
         request()
             .when()
                 .get(BASE_PATH + "/" + INVALID_ID)
@@ -69,7 +67,7 @@ class BooksApiTest {
     }
 
     @Test
-    void shouldCreateBookWithValidPayload() {
+    void testCreateBookWithValidPayload() {
         request()
                 .body(TestData.validBookPayload())
         .when()
@@ -82,7 +80,7 @@ class BooksApiTest {
     }
 
     @Test
-    void shouldReturnStatus400CreatingBookWithInvalidPayload() {
+    void testReturnStatus400CreatingBookWithInvalidPayload() {
         request()
                 .body(TestData.invalidBookPayload())
         .when()
@@ -92,7 +90,7 @@ class BooksApiTest {
     }
 
     @Test
-    void shouldReturnStatus400CreatingBookWithEmptyBody() {
+    void testReturnStatus400CreatingBookWithEmptyBody() {
         request()
                 .body("")
         .when()
@@ -102,7 +100,7 @@ class BooksApiTest {
     }
 
     @Test
-    void shouldUpdateBookWithValidPayload() {
+    void testUpdateBookWithValidPayload() {
         request()
                 .body(TestData.validBookPayload())
         .when()
@@ -115,7 +113,7 @@ class BooksApiTest {
 
 
     @Test
-    void shouldReturnStatus200WhenUpdatingNonExistingObjectMockApiBehavior() {
+    void testReturnStatus200WhenUpdatingNonExistingObjectMockApiBehavior() {
         request()
                 .body(TestData.validBookPayload())
         .when()
@@ -126,7 +124,7 @@ class BooksApiTest {
     }
 
     @Test
-    void shouldReturnStatus400WhenUpdatingWithInvalidPayload() {
+    void testReturnStatus400WhenUpdatingWithInvalidPayload() {
         request()
                 .body(TestData.invalidBookPayload())
         .when()
@@ -136,7 +134,7 @@ class BooksApiTest {
     }
 
     @Test
-    void shouldReturnStatus400WhenUpdatingWithEmptyBody() {
+    void testReturnStatus400WhenUpdatingWithEmptyBody() {
         request()
                 .body("")
         .when()

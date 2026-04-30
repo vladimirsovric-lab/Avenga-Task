@@ -8,7 +8,7 @@ import utils.TestData;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class AuthorsApiTests {
+public class AuthorsApiTest {
     private static final String BASE_PATH = "/api/v1/Authors";
     private static final String VALID_ID = "1";
     private static final String NON_EXISTING_ID = "99999999";
