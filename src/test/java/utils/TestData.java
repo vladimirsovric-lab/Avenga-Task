@@ -27,4 +27,25 @@ public class TestData {
 
         return body;
     }
+
+    public static Map<String, Object> validAuthorPayload() {
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("id", 101);
+        body.put("idBook", 1);
+        body.put("firstName", "Vladimir");
+        body.put("lastName", "Sovric");
+
+        return body;
+    }
+
+    public static Map<String, Object> invalidAuthorPayload() {
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("id", "invalid_id");
+        body.put("idBook", "wrong");
+        body.put("firstName", 123456);
+
+        return body;
+    }
 }
