@@ -13,9 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Build Docker image
         run: docker build -t bookstore-api-tests .
 
@@ -23,4 +20,13 @@ jobs:
         run: |
           docker run --rm \
           -e BASE_URL=https://fakerestapi.azurewebsites.net \
-          bookstore-api-tests
+          -v ${{ github.workspace }}/target:/app/target \
+          bookstore-api-tests \
+          mvn clean test surefire-report:report
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: surefire-test-report
+          path: target/reports/
