@@ -23,8 +23,9 @@ jobs:
           -v ${{ github.workspace }}/target:/app/target \
           bookstore-api-tests \
           test
-          
+
       - name: Generate Allure report
+        if: always()
         run: |
           docker run --rm \
           -v ${{ github.workspace }}/target:/app/target \
