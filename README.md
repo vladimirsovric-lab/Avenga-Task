@@ -83,23 +83,80 @@ docker run --rm -e BASE_URL=https://fakerestapi.azurewebsites.net bookstore-api-
 
 ## Test Reporting
 
-Test reports are generated using Maven Surefire.
+The project provides two types of reports:
 
-To generate a report locally:
+* **Allure Report** – primary, detailed, and human-readable report
+* **Maven Surefire Report** – basic execution summary
+
+---
+
+### Allure Report (Primary)
+
+Allure provides a rich and interactive test report with execution details, steps, and statistics.
+
+#### Generate report locally
+
+```
+mvn clean test
+mvn allure:report
+```
+
+#### Report location
+
+```text
+target/site/allure-maven-plugin/index.html
+```
+
+#### How to view the report
+
+To properly view the report, start a local server:
+
+```bash
+cd target/site/allure-maven-plugin
+python3 -m http.server 8080
+```
+
+Then open:
+
+```text
+http://localhost:8080
+```
+
+> Opening the file directly may not work correctly due to browser security restrictions.
+
+#### CI/CD
+
+In GitHub Actions, the Allure report is:
+
+* Generated during the pipeline execution
+* Uploaded as a workflow artifact
+
+To view it:
+
+1. Download the artifact from the GitHub Actions run
+2. Extract it locally
+3. Serve it using the same method described above
+
+---
+
+### Maven Surefire Report (Secondary)
+
+Surefire provides a simple summary of test execution results.
+
+#### Generate report
 
 ```
 mvn test surefire-report:report
 ```
 
-Report location:
+#### Report location
 
+```text
+target/site/surefire-report.html
 ```
-target/site/surefire.html
-```
 
-In CI, reports are uploaded as artifacts.
+This report is mainly used for quick verification and as a fallback, while Allure serves as the primary reporting tool.
 
----
 
 ## CI/CD Pipeline
 
